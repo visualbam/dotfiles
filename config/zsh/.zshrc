@@ -71,18 +71,22 @@ catppuccin() {
 
 # Function to reload Oh-my-posh prompt and update OpenCode theme (called by WezTerm theme switcher)
 _reload_prompt() {
+    # Read theme from file
     if [ -f ~/.config/catppuccin-theme ]; then
         export CATPPUCCIN_FLAVOUR=$(cat ~/.config/catppuccin-theme | tr -d ' \n\r')
     fi
     
     # Update OpenCode theme based on Catppuccin theme
     if [ "$CATPPUCCIN_FLAVOUR" = "latte" ]; then
-        _update_opencode_theme "catppuccin"
+        _update_opencode_theme "catppuccin" 2>/dev/null
     else
-        _update_opencode_theme "catppuccin-macchiato"
+        _update_opencode_theme "catppuccin-macchiato" 2>/dev/null
     fi
     
+    # Reinitialize oh-my-posh with new theme
     eval "$(oh-my-posh init zsh --config ~/.poshthemes/catppuccin.omp.json)" > /dev/null 2>&1
+    
+    # Clear screen to show new prompt
     clear
 }
 
@@ -91,25 +95,50 @@ _update_opencode_theme() {
     local theme="$1"
     local config_file="$HOME/.config/opencode/opencode.json"
     
-    if [ -f "$config_file" ]; then
-        # Use sed to update the theme field in the JSON
-        if [[ "$OSTYPE" == "darwin"* ]]; then
-            # macOS sed requires -i ''
-            sed -i '' "s/\"theme\": \"[^\"]*\"/\"theme\": \"$theme\"/" "$config_file"
-        else
-            # Linux sed
-            sed -i "s/\"theme\": \"[^\"]*\"/\"theme\": \"$theme\"/" "$config_file"
-        fi
+    # Only update if config file exists
+    if [ ! -f "$config_file" ]; then
+        return 0
+    fi
+    
+    # Use sed to update the theme field in the JSON
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        # macOS sed requires -i ''
+        sed -i '' "s/\"theme\": \"[^\"]*\"/\"theme\": \"$theme\"/" "$config_file" 2>/dev/null
+    else
+        # Linux sed
+        sed -i "s/\"theme\": \"[^\"]*\"/\"theme\": \"$theme\"/" "$config_file" 2>/dev/null
     fi
 }
 
 # Function to test Catppuccin sync
 test-catppuccin() {
-    echo "Current theme file: $(cat ~/.config/catppuccin-theme 2>/dev/null || echo "not set")"
-    echo "Current env var: ${CATPPUCCIN_FLAVOUR:-not set}"
+    echo "=== Theme Sync Status ==="
+    echo "Theme file: $(cat ~/.config/catppuccin-theme 2>/dev/null || echo "not set")"
+    echo "Shell env:  ${CATPPUCCIN_FLAVOUR:-not set}"
+    
+    # Check OpenCode theme
+    if [ -f ~/.config/opencode/opencode.json ]; then
+        local oc_theme=$(grep '"theme"' ~/.config/opencode/opencode.json | sed 's/.*"theme": "\([^"]*\)".*/\1/')
+        echo "OpenCode:   $oc_theme"
+        
+        # Validate sync
+        local expected_oc_theme="catppuccin-macchiato"
+        if [ "${CATPPUCCIN_FLAVOUR:-mocha}" = "latte" ]; then
+            expected_oc_theme="catppuccin"
+        fi
+        
+        if [ "$oc_theme" = "$expected_oc_theme" ]; then
+            echo "✅ OpenCode theme is in sync"
+        else
+            echo "❌ OpenCode theme out of sync (expected: $expected_oc_theme)"
+        fi
+    else
+        echo "OpenCode:   config not found"
+    fi
+    
     echo ""
-    echo "To test:"
-    echo "1. Reload Wezterm config (Ctrl+Shift+R)"
-    echo "2. Switch theme in Wezterm (Ctrl+Shift+T)"
-    echo "3. Prompt should update instantly in the same pane"
+    echo "To switch themes:"
+    echo "• In WezTerm: Ctrl+a then Shift+T"
+    echo "• In shell: catppuccin [latte|frappe|macchiato|mocha]"
+    echo "• Manual reload: _reload_prompt"
 }
