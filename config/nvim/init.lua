@@ -371,32 +371,62 @@ require('lazy').setup({
     },
   },
 
-  {
-    'sudo-tee/opencode.nvim',
-    config = function()
-      require('opencode').setup {}
-    end,
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      {
-        'MeanderingProgrammer/render-markdown.nvim',
-        opts = {
-          anti_conceal = { enabled = false },
-          file_types = { 'markdown', 'opencode_output' },
-        },
-        ft = { 'markdown', 'Avante', 'copilot-chat', 'opencode_output' },
-      },
-      -- Optional, for file mentions and commands completion, pick only one
-      'saghen/blink.cmp',
-      -- 'hrsh7th/nvim-cmp',
+   {
+     'sudo-tee/opencode.nvim',
+     config = function()
+       require('opencode').setup {
+         keymap = {
+            input_window = {
+              ['<cr>'] = { 'submit_input_prompt', mode = { 'n', 'i' } },
+              ['<esc>'] = { function() end }, -- Disable ESC closing the pane
+              ['<C-c>'] = { 'cancel' },
+              ['~'] = { 'mention_file', mode = 'i' },
+              ['@'] = { 'mention', mode = 'i' },
+              ['/'] = { 'slash_commands', mode = 'i' },
+              ['#'] = { 'context_items', mode = 'i' },
+              ['<M-v>'] = { 'paste_image', mode = 'i' },
+              ['<C-i>'] = { 'focus_input', mode = { 'n', 'i' } },
+              ['<tab>'] = { 'toggle_pane', mode = { 'n', 'i' } },
+              ['<up>'] = { 'prev_prompt_history', mode = { 'n', 'i' } },
+              ['<down>'] = { 'next_prompt_history', mode = { 'n', 'i' } },
+              ['<M-m>'] = { 'switch_mode' },
+            },
+            output_window = {
+              ['<esc>'] = { function() end }, -- Disable ESC closing the pane
+              ['<C-c>'] = { 'cancel' },
+              [']]'] = { 'next_message' },
+              ['[['] = { 'prev_message' },
+              ['<tab>'] = { 'toggle_pane', mode = { 'n', 'i' } },
+              ['i'] = { 'focus_input', 'n' },
+              ['<leader>oS'] = { 'select_child_session' },
+              ['<leader>oD'] = { 'debug_message' },
+              ['<leader>oO'] = { 'debug_output' },
+              ['<leader>ods'] = { 'debug_session' },
+            },
+         },
+       }
+     end,
+     dependencies = {
+       'nvim-lua/plenary.nvim',
+       {
+         'MeanderingProgrammer/render-markdown.nvim',
+         opts = {
+           anti_conceal = { enabled = false },
+           file_types = { 'markdown', 'opencode_output' },
+         },
+         ft = { 'markdown', 'Avante', 'copilot-chat', 'opencode_output' },
+       },
+       -- Optional, for file mentions and commands completion, pick only one
+       'saghen/blink.cmp',
+       -- 'hrsh7th/nvim-cmp',
 
-      -- Optional, for file mentions picker, pick only one
-      'folke/snacks.nvim',
-      -- 'nvim-telescope/telescope.nvim',
-      -- 'ibhagwan/fzf-lua',
-      -- 'nvim_mini/mini.nvim',
-    },
-  },
+       -- Optional, for file mentions picker, pick only one
+       'folke/snacks.nvim',
+       -- 'nvim-telescope/telescope.nvim',
+       -- 'ibhagwan/fzf-lua',
+       -- 'nvim_mini/mini.nvim',
+     },
+   },
 
   {
     'obsidian-nvim/obsidian.nvim',
@@ -1143,21 +1173,21 @@ require('lazy').setup({
   {
     'mg979/vim-visual-multi',
     branch = 'master',
-     init = function()
-       -- Minimal setup - keep most defaults but customize key ones
-       -- NOTE: Using <leader>j/k for cursor movement to avoid conflict with
-       -- smart-splits.nvim's <C-j>/<C-k> pane navigation
-       vim.g.VM_maps = {
-         ['Find Under'] = '<C-n>',
-         ['Find Subword Under'] = '<C-n>',
-         ['Skip Region'] = '<C-x>', -- Skip current and go to next
-         ['Remove Region'] = '<C-p>', -- Remove current selection (go back)
-         ['Add Cursor Down'] = '<leader>j',
-         ['Add Cursor Up'] = '<leader>k',
-         ['Select All'] = '<leader>A',
-         ['Start Regex Search'] = '<leader>/',
-       }
-     end,
+    init = function()
+      -- Minimal setup - keep most defaults but customize key ones
+      -- NOTE: Using <leader>j/k for cursor movement to avoid conflict with
+      -- smart-splits.nvim's <C-j>/<C-k> pane navigation
+      vim.g.VM_maps = {
+        ['Find Under'] = '<C-n>',
+        ['Find Subword Under'] = '<C-n>',
+        ['Skip Region'] = '<C-x>', -- Skip current and go to next
+        ['Remove Region'] = '<C-p>', -- Remove current selection (go back)
+        ['Add Cursor Down'] = '<leader>j',
+        ['Add Cursor Up'] = '<leader>k',
+        ['Select All'] = '<leader>A',
+        ['Start Regex Search'] = '<leader>/',
+      }
+    end,
   },
 
   {
