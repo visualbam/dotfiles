@@ -1143,19 +1143,21 @@ require('lazy').setup({
   {
     'mg979/vim-visual-multi',
     branch = 'master',
-    init = function()
-      -- Minimal setup - keep most defaults but customize key ones
-      vim.g.VM_maps = {
-        ['Find Under'] = '<C-n>',
-        ['Find Subword Under'] = '<C-n>',
-        ['Skip Region'] = '<C-x>', -- Skip current and go to next
-        ['Remove Region'] = '<C-p>', -- Remove current selection (go back)
-        ['Add Cursor Down'] = '<C-j>',
-        ['Add Cursor Up'] = '<C-k>',
-        ['Select All'] = '<leader>A',
-        ['Start Regex Search'] = '<leader>/',
-      }
-    end,
+     init = function()
+       -- Minimal setup - keep most defaults but customize key ones
+       -- NOTE: Using <leader>j/k for cursor movement to avoid conflict with
+       -- smart-splits.nvim's <C-j>/<C-k> pane navigation
+       vim.g.VM_maps = {
+         ['Find Under'] = '<C-n>',
+         ['Find Subword Under'] = '<C-n>',
+         ['Skip Region'] = '<C-x>', -- Skip current and go to next
+         ['Remove Region'] = '<C-p>', -- Remove current selection (go back)
+         ['Add Cursor Down'] = '<leader>j',
+         ['Add Cursor Up'] = '<leader>k',
+         ['Select All'] = '<leader>A',
+         ['Start Regex Search'] = '<leader>/',
+       }
+     end,
   },
 
   {
