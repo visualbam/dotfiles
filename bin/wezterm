@@ -1,0 +1,12 @@
+#!/bin/bash
+# Wrapper for wezterm CLI commands
+# Routes to the actual wezterm binary in the app bundle (macOS)
+# or direct wezterm command (Linux/WSL)
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    # macOS: Use the app bundle binary
+    exec /Applications/WezTerm.app/Contents/MacOS/wezterm "$@"
+else
+    # Linux/WSL: Use the system wezterm command
+    exec wezterm "$@"
+fi

@@ -1,0 +1,25 @@
+# Machine-specific configurations (should be customized locally)
+.wezterm-local.lua
+config/zsh/.zshrc.local
+config/nvim/init.local.lua
+
+# Editor/IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# System files
+Thumbs.db
+.env
+.env.local
+
+# OS-specific
+*.sublime-project
+*.sublime-workspace
+
+# Dependencies and build
+node_modules/
+.pnpm-debug.log

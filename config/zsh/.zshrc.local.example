@@ -1,0 +1,18 @@
+# This file is a template for machine-specific zsh configuration
+# Copy this to ~/.zshrc.local and customize for your machine
+# This file is gitignored so it won't be committed to the repository
+# It will be sourced at the end of .zshrc if it exists
+
+# Example: Machine-specific environment variables
+# export MACHINE_NAME="my-machine"
+
+# Example: Machine-specific aliases
+# alias myproject="cd ~/projects/myproject"
+
+# Example: Custom PATH additions
+# export PATH="$PATH:/usr/local/my-tools/bin"
+
+# Example: Machine-specific functions
+# function my-function() {
+#   echo "This is machine-specific"
+# }

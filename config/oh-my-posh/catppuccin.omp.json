@@ -1,0 +1,72 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "palette": {
+        "os": "#ACB0BE",
+        "pink": "#F5BDE6",
+        "lavender": "#B7BDF8",
+        "blue":  "#8AADF4",
+        "latte_os": "#6C6F85",
+        "latte_pink": "#E64553",
+        "latte_lavender": "#7287FD",
+        "latte_blue": "#1E66F5"
+  },
+  "blocks": [
+    {
+      "alignment": "left",
+      "segments": [
+        {
+          "foreground_templates": [
+            "{{ if eq .Env.CATPPUCCIN_FLAVOUR \"latte\" }}#6C6F85{{ else }}#ACB0BE{{ end }}"
+          ],
+          "style": "plain",
+          "template": "{{.Icon}}  ",
+          "type": "os"
+        },
+        {
+          "foreground_templates": [
+            "{{ if eq .Env.CATPPUCCIN_FLAVOUR \"latte\" }}#E64553{{ else }}#F5BDE6{{ end }}"
+          ],
+          "properties": {
+            "folder_icon": "..\ue5fe..",
+            "home_icon": "~",
+            "style": "agnoster_short"
+          },
+          "style": "plain",
+          "template": "{{ .Path }} ",
+          "type": "path"
+        },
+        {
+          "foreground_templates": [
+            "{{ if eq .Env.CATPPUCCIN_FLAVOUR \"latte\" }}#7287FD{{ else }}#B7BDF8{{ end }}"
+          ],
+          "style": "plain",
+          "properties": {
+            "branch_icon": "\ue725 ",
+            "cherry_pick_icon": "\ue29b ",
+            "commit_icon": "\uf417 ",
+            "fetch_status": false,
+            "fetch_upstream_icon": false,
+            "merge_icon": "\ue727 ",
+            "no_commits_icon": "\uf0c3 ",
+            "rebase_icon": "\ue728 ",
+            "revert_icon": "\uf0e2 ",
+            "tag_icon": "\uf412 "
+          },
+          "template": "{{ .HEAD }} ",
+          "type": "git"
+        },
+        {
+          "foreground_templates": [
+            "{{ if eq .Env.CATPPUCCIN_FLAVOUR \"latte\" }}#1E66F5{{ else }}#8AADF4{{ end }}"
+          ],
+          "style": "plain",
+          "template": "➜ ",
+          "type": "text"
+        }
+      ],
+      "type": "prompt"
+    }
+  ],
+  "final_space": true,
+  "version": 3
+}

@@ -1,0 +1,21 @@
+-- This file is a template for machine-specific wezterm configuration
+-- Copy this to ~/.config/wezterm/.wezterm-local.lua and customize for your machine
+-- This file is gitignored so it won't be committed to the repository
+
+-- Example: Define workspace layouts for your specific machine
+-- Uncomment and modify these to customize your workspace setup
+
+-- local wezterm = require 'wezterm'
+--
+-- return {
+--   -- Example: macOS workspace
+--   workspaces = {
+--     {
+--       name = 'main',
+--       -- Customize pane arrangement for your workspace
+--     },
+--   },
+--
+--   -- Example: Override leader key timeout if needed
+--   -- leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 1000 },
+-- }
