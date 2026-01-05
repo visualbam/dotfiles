@@ -1,0 +1,35 @@
+[language-server.deno]
+command = "deno"
+args = ["lsp"]
+config = { enable = true, lint = true }
+
+[language-server.emmet-lsp]
+command = "emmet-language-server"
+args = ["--stdio"]
+
+[[language]]
+name = "typescript"
+scope = "source.ts"
+file-types = ["ts"]
+formatter = { command = "deno", args = ["fmt", "-"] }
+language-servers = ["deno"]
+
+[[language]]
+name = "tsx"
+scope = "source.tsx"
+file-types = ["tsx"]
+formatter = { command = "deno", args = ["fmt", "-"] }
+language-servers = ["deno", "emmet-lsp"]
+
+[[language]]
+name = "jsx"
+scope = "source.jsx"
+file-types = ["jsx"]
+formatter = { command = "deno", args = ["fmt", "-"] }
+language-servers = ["deno", "emmet-lsp"]
+
+[[language]]
+name = "html"
+roots = [".git"]
+formatter = { command = "prettier", args = ["--parser", "html"] }
+language-servers = ["vscode-html-language-server", "emmet-lsp"]

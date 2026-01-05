@@ -11,6 +11,7 @@ A unified cross-platform dotfiles setup for seamless terminal, editor, and shell
 - **Machine-Specific Config**: Template system for per-machine customization
 - **Integrated Tools**:
   - Neovim (nvim) with lazy.nvim plugin manager
+  - Helix editor with language support
   - WezTerm terminal emulator with smart pane management
   - Oh-My-Posh shell prompt with Catppuccin theme
   - Node version manager (fnm)
@@ -22,6 +23,7 @@ A unified cross-platform dotfiles setup for seamless terminal, editor, and shell
 ```
 config/
 ├── nvim/init.lua              # Neovim configuration with smart-splits
+├── helix/                      # Helix editor configuration
 ├── wezterm/wezterm.lua        # WezTerm terminal configuration
 ├── oh-my-posh/                # Oh-My-Posh theme and configuration
 └── zsh/.zshrc                 # Zsh shell configuration
