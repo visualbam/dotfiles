@@ -1,0 +1,39 @@
+# Yazi Configuration
+# For comprehensive documentation, see: https://yazi-rs.github.io/docs/configuration/
+
+[opener]
+# Text editor opener - currently set to Helix
+# To switch to Neovim: change "hx" to "nvim" in all rules below
+edit = [
+    { run = "hx %s", block = true, for = "unix" },
+    { run = "hx %s", block = true, for = "macos" },
+    { run = "hx %s", block = true, for = "windows" },
+]
+
+# Open images with built-in previewer
+image = [
+    { run = "open -a Preview %s", for = "macos" },
+    { run = "xdg-open %s", for = "linux" },
+]
+
+# Open videos
+video = [
+    { run = "open %s", for = "macos" },
+    { run = "xdg-open %s", for = "linux" },
+]
+
+[open]
+# Use the "edit" opener for all text files by default
+prepend_rules = [
+    { mime = "text/*", use = "edit" },
+    { mime = "application/json", use = "edit" },
+    { mime = "application/toml", use = "edit" },
+    { mime = "application/xml", use = "edit" },
+    { mime = "application/yaml", use = "edit" },
+]
+
+# Bulk rename with editor
+# To switch editors, update the "edit" opener above
+[[open.prepend_rules]]
+url = "bulk-rename.txt"
+use = "edit"

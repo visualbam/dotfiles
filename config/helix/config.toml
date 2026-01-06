@@ -2,3 +2,7 @@ theme = "catppuccin_mocha"
 
 [editor]
 scrolloff = 3
+
+[editor.indent-guides]
+render = true
+character = "┊"  # or "│", "¦", etc.

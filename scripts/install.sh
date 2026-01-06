@@ -36,6 +36,7 @@ mkdir -p ~/.config/nvim
 mkdir -p ~/.config/wezterm
 mkdir -p ~/.config/oh-my-posh
 mkdir -p ~/.config/helix
+mkdir -p ~/.config/yazi
 mkdir -p ~/.local/bin
 
 # Function to create symlink
@@ -65,6 +66,7 @@ create_symlink "$DOTFILES_DIR/config/wezterm/wezterm.lua" "$HOME/.config/wezterm
 create_symlink "$DOTFILES_DIR/config/oh-my-posh/catppuccin.omp.json" "$HOME/.config/oh-my-posh/catppuccin.omp.json" "oh-my-posh theme"
 create_symlink "$DOTFILES_DIR/config/helix/config.toml" "$HOME/.config/helix/config.toml" "helix config"
 create_symlink "$DOTFILES_DIR/config/helix/languages.toml" "$HOME/.config/helix/languages.toml" "helix languages"
+create_symlink "$DOTFILES_DIR/config/yazi/yazi.toml" "$HOME/.config/yazi/yazi.toml" "yazi config"
 create_symlink "$DOTFILES_DIR/config/zsh/.zshrc" "$HOME/.zshrc" "zsh config"
 create_symlink "$DOTFILES_DIR/bin/wezterm" "$HOME/.local/bin/wezterm" "wezterm wrapper"
 
