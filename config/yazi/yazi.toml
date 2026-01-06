@@ -30,10 +30,5 @@ prepend_rules = [
     { mime = "application/toml", use = "edit" },
     { mime = "application/xml", use = "edit" },
     { mime = "application/yaml", use = "edit" },
+    { url = "bulk-rename.txt", use = "edit" },
 ]
-
-# Bulk rename with editor
-# To switch editors, update the "edit" opener above
-[[open.prepend_rules]]
-url = "bulk-rename.txt"
-use = "edit"
